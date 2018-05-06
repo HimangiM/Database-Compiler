@@ -1,11 +1,16 @@
 %{
 #include<stdio.h>
 %}
-%token ID COMA INT CHAR FLOAT MAKE
+%token ID COMA INT CHAR FLOAT MAKE INSERT
 %%
-stmt:type {printf("valid\n");}
+stmt:create {printf("valid2\n");}
+|feed {printf("valid\n");}
 ;
-type:MAKE ID data st
+create:MAKE ID data st
+;
+feed: INSERT ID '('ID feedst')'
+;
+feedst:COMA ID|' '
 ;
 st:COMA data
 |';'
