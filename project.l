@@ -1,22 +1,20 @@
 %{
 #include "y.tab.h"
-extern yylval;	
-extern char* yytext;
-#include <string.h>
-#include <stdlib.h>
 %}
 %%
-[0-9]+ {yylval=atoi(yytext); 
-		return DIGIT;}
-[","] {return COMA;}
-create {return CREATE;}
-table {return TABLE;}
-[a-zA-Z]+ {printf("Values:%s", yytext);
-		   char *str = malloc(strlen(yytext)+1);
-		   strcpy(str, yytext);
-		   return str;}
-\n {return '\n';}
+"," {return COMA;}
+"int" {return INT;}
+"char" {return CHAR;}
+"float" {return FLOAT;}
+insert {return INSERT;}
+make {return MAKE;}
+[a-zA-Z]+ {return ID;}
+; {return ';';}
+[()] {return *yytext;}
+\n {return -1;}
+. {;}
 %%
-int yywrap(){
-	return 0;
+int yywrap()
+{
+return 0;
 }
